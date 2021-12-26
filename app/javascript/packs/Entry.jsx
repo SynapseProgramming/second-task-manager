@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	render(
 		<Router>
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<Home />}>
+					<Route path="hehe" element={<Bk />} />
+				</Route>
 			</Routes>
 		</Router>,
 		document.body.appendChild(document.createElement("div"))
