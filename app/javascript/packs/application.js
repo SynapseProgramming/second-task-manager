@@ -17,6 +17,7 @@ var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
 
 // All required components would be placed here
-require("./hello_react");
+// require("./hello_react");
+require("./Entry");
 require("bootstrap");
 import "bootstrap/dist/css/bootstrap";
