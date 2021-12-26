@@ -50,3 +50,7 @@
   width: 100%;
   opacity: 0.4;
 }
+
+.margin-left{
+    margin-left: 80px !important;
+}
