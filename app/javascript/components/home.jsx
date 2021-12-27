@@ -6,7 +6,7 @@ export default () => (
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<span class="navbar-brand mb-0 h1">Task Planner V1.0</span>
 			<form class="form-inline">
-				<Link to="/hehe">
+				<Link to="/tasktable">
 					<button class="btn btn-outline-success" type="button">
 						View Tasks
 					</button>
