@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'tasks/index'
-      get 'tasks/create'
-      get 'tasks/show'
-      get 'tasks/destroy'
+      post 'tasks/create'
+      get '/show/:id', to: 'recipes#show'
+      delete '/destroy/:id',  to: 'tasks#destroy'
     end
   end
   root 'pages#home'
