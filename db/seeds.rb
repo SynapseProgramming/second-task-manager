@@ -4,4 +4,16 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   Character.create(name: 'Luke', movie: movies.first )
+
+
+
+5.times do |i|
+Task.create(
+  task: "Find Ricardo #{i+1}",
+  priority: "HIGH",
+  description: "Find him now mah homie!"
+
+)
+
+end
