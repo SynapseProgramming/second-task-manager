@@ -6,14 +6,14 @@ import $ from "jquery";
 import Popper from "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Home from "../components/home";
-import Bk from "../components/bookeep";
+import TaskTable from "../components/tasktable";
 
 document.addEventListener("DOMContentLoaded", () => {
 	render(
 		<Router>
 			<Routes>
 				<Route path="/" element={<Home />}>
-					<Route path="hehe" element={<Bk />} />
+					<Route path="tasktable" element={<TaskTable />} />
 				</Route>
 			</Routes>
 		</Router>,
