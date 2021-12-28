@@ -7,6 +7,7 @@ import Popper from "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Home from "../components/home";
 import TaskTable from "../components/tasktable";
+import EntryList from "../components/entrylist";
 
 document.addEventListener("DOMContentLoaded", () => {
 	render(
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			<Routes>
 				<Route path="/" element={<Home />}>
 					<Route path="tasktable" element={<TaskTable />} />
+					<Route path="entrylist" element={<EntryList />} />
 				</Route>
 			</Routes>
 		</Router>,

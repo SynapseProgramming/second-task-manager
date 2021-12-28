@@ -11,12 +11,11 @@ export default () => (
 						View Tasks
 					</button>
 				</Link>
-				<button class="btn btn-sm btn-outline-secondary" type="button">
-					Add Tasks
-				</button>
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-					Search
-				</button>
+				<Link to="/entrylist">
+					<button class="btn btn-sm btn-outline-secondary" type="button">
+						Add Tasks
+					</button>
+				</Link>
 			</form>
 		</nav>
 		<Outlet />
