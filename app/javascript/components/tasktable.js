@@ -3,6 +3,9 @@ import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 const SimpleTable = props => {
+	const handleDelete = rowId => {
+		console.log(rowId);
+	};
 	const columns = [
 		{
 			dataField: "id",
@@ -19,6 +22,21 @@ const SimpleTable = props => {
 		{
 			dataField: "description",
 			text: "Description"
+		},
+		{
+			dataField: "id",
+			text: "Remove",
+			editable: false,
+			formatter: (cellContent, row) => {
+				return (
+					<button
+						className="btn btn-danger btn-xs"
+						onClick={() => handleDelete(row.id)}
+					>
+						Delete
+					</button>
+				);
+			}
 		}
 	];
 	return (
