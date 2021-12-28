@@ -1,23 +1,29 @@
 import React, {Component} from "react";
-import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
+import BootstrapTable from "react-bootstrap-table-next";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 const SimpleTable = props => {
+	const columns = [
+		{
+			dataField: "id",
+			text: "ID"
+		},
+		{
+			dataField: "task",
+			text: "Task"
+		},
+		{
+			dataField: "priority",
+			text: "Priority"
+		},
+		{
+			dataField: "description",
+			text: "Description"
+		}
+	];
 	return (
 		<div>
-			<BootstrapTable data={props.data}>
-				<TableHeaderColumn isKey dataField="id" dataAlign="center">
-					Id
-				</TableHeaderColumn>
-				<TableHeaderColumn dataField="task" dataAlign="center">
-					Task
-				</TableHeaderColumn>
-				<TableHeaderColumn dataField="priority" dataAlign="center">
-					Priority
-				</TableHeaderColumn>
-				<TableHeaderColumn dataField="description" dataAlign="center">
-					Description
-				</TableHeaderColumn>
-			</BootstrapTable>
+			<BootstrapTable keyField="id" data={props.data} columns={columns} />
 		</div>
 	);
 };
