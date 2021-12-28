@@ -3,9 +3,29 @@ import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 const SimpleTable = props => {
+	//helper functions
+
 	const handleDelete = rowId => {
 		console.log(rowId);
+		const url = `/api/v1/destroy/${rowId}`;
+		const token = document.querySelector('meta[name="csrf-token"]').content;
+		fetch(url, {
+			method: "DELETE",
+			headers: {
+				"X-CSRF-Token": token,
+				"Content-Type": "application/json"
+			}
+		})
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw new Error("Network response was not ok.");
+			})
+			.then(() => console.log("successfully deleted record!"))
+			.catch(error => console.log(error.message));
 	};
+
 	const columns = [
 		{
 			dataField: "id",

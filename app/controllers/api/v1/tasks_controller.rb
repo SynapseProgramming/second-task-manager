@@ -1,7 +1,7 @@
 class Api::V1::TasksController < ApplicationController
   def index
-    all_tasks= Task.all
-    render json: all_tasks
+    @all_tasks= Task.all
+    render json: @all_tasks
   end
 
   def create
@@ -11,5 +11,9 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def destroy
+    @task_to_remove=Task.find(params[:id])
+    @task_to_remove.destroy
+     render json: { message: 'Task deleted' }
+
   end
 end
