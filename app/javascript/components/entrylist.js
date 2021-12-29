@@ -16,15 +16,11 @@ export default class Taskinput extends Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 	onChange(event) {
-		console.log("something has changed");
-		console.log(event.target.name);
-		console.log(event.target.value);
 		this.setState({[event.target.name]: event.target.value});
 	}
 	onSubmit(event) {
 		// prevent default html redirect
 		event.preventDefault();
-		console.log("button pressed");
 		const {task, priority, description} = this.state;
 		// if theres no data filled inside
 		if (task.length == 0 || description.length == 0) return;
