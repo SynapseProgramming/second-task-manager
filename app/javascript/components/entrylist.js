@@ -47,6 +47,8 @@ export default class Taskinput extends Component {
 				throw new Error("Network response was not ok.");
 			})
 			.then(response => {
+				//TODO: Add a popup which shows that the submission is successful
+				// TODO: Add data checks for the input fields.
 				console.log("Successfully Added");
 			})
 			.catch(error => console.log(error.message));
