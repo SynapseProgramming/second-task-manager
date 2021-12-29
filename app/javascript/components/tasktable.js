@@ -52,6 +52,7 @@ class Tasks extends React.Component {
 			},
 			{
 				dataField: "description",
+
 				text: "Description"
 			},
 			{

@@ -28,7 +28,7 @@ export default class Taskinput extends Component {
 		const body = {
 			task,
 			priority,
-			description: description.replace(/\n/g, "<br> <br>")
+			description
 		};
 		const token = document.querySelector('meta[name="csrf-token"]').content;
 		const url = "api/v1/tasks/create";
