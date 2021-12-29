@@ -4,12 +4,23 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export default class Taskinput extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+		this.onChange = this.onChange.bind(this);
+	}
+	change_cnt = 0;
+	onChange(event) {
+		console.log("something has changed");
+		console.log(this.change_cnt);
+		this.change_cnt = this.change_cnt + 1;
+	}
 	do_stuff = () => {
 		console.log("button pressed");
 	};
 	render() {
 		return (
-			<Form>
+			<Form onChange={this.onChange}>
 				<Form.Group className="mb-3" controlId="TaskInput">
 					<Form.Label>Task</Form.Label>
 					<Form.Control type="textarea" placeholder="Enter Task" rows={3} />
