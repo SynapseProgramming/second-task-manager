@@ -6,13 +6,19 @@ import Button from "react-bootstrap/Button";
 export default class Taskinput extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			task: "",
+			priority: "",
+			description: ""
+		};
+
 		this.onChange = this.onChange.bind(this);
 	}
 	onChange(event) {
 		console.log("something has changed");
 		console.log(event.target.name);
 		console.log(event.target.value);
+		this.setState({[event.target.name]: event.target.value});
 	}
 	do_stuff = () => {
 		console.log("button pressed");
