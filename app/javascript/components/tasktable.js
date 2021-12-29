@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-// TODO: fix ID clash bug
 // TODO: Add popup for successful deletion of task
 class Tasks extends React.Component {
 	constructor(props) {
@@ -11,7 +10,8 @@ class Tasks extends React.Component {
 		};
 	}
 
-	SimpleTable = props => {
+	// This function generates the table
+	MainTable = props => {
 		//helper functions
 
 		const handleDelete = rowId => {
@@ -39,10 +39,6 @@ class Tasks extends React.Component {
 		};
 
 		const columns = [
-			{
-				dataField: "id",
-				text: "ID"
-			},
 			{
 				dataField: "task",
 				text: "Task"
@@ -79,6 +75,7 @@ class Tasks extends React.Component {
 		);
 	};
 
+	//helper function to fetch the latest record from the database
 	update_state = () => {
 		const url = "/api/v1/tasks/index";
 		fetch(url)
@@ -96,7 +93,7 @@ class Tasks extends React.Component {
 		this.update_state();
 	}
 	render() {
-		return <this.SimpleTable data={this.state.tasks} />;
+		return <this.MainTable data={this.state.tasks} />;
 	}
 }
 export default Tasks;
