@@ -1,4 +1,5 @@
 class Api::V1::TasksController < ApplicationController
+  skip_forgery_protection
   def index
     @all_tasks= Task.all
     render json: @all_tasks
