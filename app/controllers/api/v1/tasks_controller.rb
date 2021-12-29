@@ -6,6 +6,12 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
+    @new_task=Task.create!(check_params)
+    if(@new_task)
+      render json: @new_task
+    else
+      render json: @new_task.errors
+    end
   end
 
   def show
@@ -16,5 +22,10 @@ class Api::V1::TasksController < ApplicationController
     @task_to_remove.destroy
      render json: { message: 'Task deleted' }
 
+  end
+  private
+
+  def check_params
+    params.permit(:task,:priority,:description)
   end
 end
