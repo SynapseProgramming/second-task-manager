@@ -22,8 +22,20 @@ export default class Taskinput extends Component {
 		this.setState({[event.target.name]: event.target.value});
 	}
 	onSubmit(event) {
+		// prevent default html redirect
 		event.preventDefault();
 		console.log("button pressed");
+		const {task, priority, description} = this.state;
+		// if theres no data filled inside
+		if (task.length == 0 || description.length == 0) return;
+		//simple json display
+		const body = {
+			task,
+			priority,
+			description: description.replace(/\n/g, "<br> <br>")
+		};
+		// display form selection as json
+		console.log(JSON.stringify(body));
 	}
 
 	render() {
