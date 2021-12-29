@@ -8,7 +8,7 @@ export default class Taskinput extends Component {
 		super(props);
 		this.state = {
 			task: "",
-			priority: "",
+			priority: "High",
 			description: ""
 		};
 
@@ -56,7 +56,7 @@ export default class Taskinput extends Component {
 
 	render() {
 		return (
-			<Form onSubmit={this.onSubmit}>
+			<Form noValidate onSubmit={this.onSubmit}>
 				<Form.Group className="mb-3" controlId="TaskInput">
 					<Form.Label>Task</Form.Label>
 					<Form.Control
@@ -79,6 +79,7 @@ export default class Taskinput extends Component {
 					<Form.Label>Description</Form.Label>
 					<Form.Control
 						name="description"
+						type="text"
 						onChange={this.onChange}
 						as="textarea"
 						rows={3}
