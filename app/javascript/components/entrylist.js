@@ -13,6 +13,7 @@ export default class Taskinput extends Component {
 		};
 
 		this.onChange = this.onChange.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 	onChange(event) {
 		console.log("something has changed");
@@ -20,12 +21,14 @@ export default class Taskinput extends Component {
 		console.log(event.target.value);
 		this.setState({[event.target.name]: event.target.value});
 	}
-	do_stuff = () => {
+	onSubmit(event) {
+		event.preventDefault();
 		console.log("button pressed");
-	};
+	}
+
 	render() {
 		return (
-			<Form>
+			<Form onSubmit={this.onSubmit}>
 				<Form.Group className="mb-3" controlId="TaskInput">
 					<Form.Label>Task</Form.Label>
 					<Form.Control
@@ -53,9 +56,7 @@ export default class Taskinput extends Component {
 						rows={3}
 					/>
 				</Form.Group>
-				<Button variant="primary" onClick={() => this.do_stuff()}>
-					Submit
-				</Button>
+				<Button type="submit">Submit</Button>
 			</Form>
 		);
 	}
