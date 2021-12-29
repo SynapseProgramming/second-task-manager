@@ -31,7 +31,27 @@ export default class Taskinput extends Component {
 			description: description.replace(/\n/g, "<br> <br>")
 		};
 		// display form selection as json
-		console.log(JSON.stringify(body));
+		// console.log(JSON.stringify(body));
+		const token = document.querySelector('meta[name="csrf-token"]').content;
+		const url = "api/v1/tasks/create";
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"X-CSRF-Token": token,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(body)
+		})
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw new Error("Network response was not ok.");
+			})
+			.then(response => {
+				console.log("Successfully Added");
+			})
+			.catch(error => console.log(error.message));
 	}
 
 	render() {
