@@ -4,6 +4,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 export default function App() {
+	const do_stuff = () => {
+		console.log("button pressed");
+	};
+
 	return (
 		<Form>
 			<Form.Group className="mb-3" controlId="TaskInput">
@@ -22,7 +26,7 @@ export default function App() {
 				<Form.Label>Description</Form.Label>
 				<Form.Control as="textarea" rows={3} />
 			</Form.Group>
-			<Button variant="primary" type="submit">
+			<Button variant="primary" onClick={() => do_stuff()}>
 				Submit
 			</Button>
 		</Form>
