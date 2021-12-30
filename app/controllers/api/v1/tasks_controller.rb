@@ -1,5 +1,5 @@
 class Api::V1::TasksController < ApplicationController
-  # skip_forgery_protection
+  skip_forgery_protection
   def index
     @all_tasks= Task.all
     render json: @all_tasks
@@ -13,6 +13,13 @@ class Api::V1::TasksController < ApplicationController
       render json: @new_task.errors
     end
   end
+
+  def update
+    @task_to_update=Task.find_by_id(params[:id])
+    @task_to_update.update!(check_params)
+    render json: {message: 'Task updated'}
+  end
+
 
   def show
   end
