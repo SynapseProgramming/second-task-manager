@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
+import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import cellEditFactory, {Type} from "react-bootstrap-table2-editor";
 // TODO: Add popup for successful deletion of task
+
 class Tasks extends React.Component {
 	constructor(props) {
 		super(props);
@@ -63,6 +65,7 @@ class Tasks extends React.Component {
 	MainTable = props => {
 		//helper functions
 
+		const {SearchBar} = Search;
 		const handleDelete = rowId => {
 			console.log(rowId);
 			const url = `/api/v1/destroy/${rowId}`;
@@ -96,6 +99,7 @@ class Tasks extends React.Component {
 			{
 				dataField: "priority",
 				text: "Priority",
+				sort: true,
 				editor: {
 					type: Type.SELECT,
 					options: [
@@ -136,14 +140,18 @@ class Tasks extends React.Component {
 			}
 		];
 		return (
-			<div>
-				<BootstrapTable
-					keyField="id"
-					data={props.data}
-					columns={columns}
-					cellEdit={this.CellEditParameters}
-				/>
-			</div>
+			<ToolkitProvider keyField="id" data={props.data} columns={columns} search>
+				{pops => (
+					<div>
+						<SearchBar {...pops.searchProps} />
+						<hr />
+						<BootstrapTable
+							cellEdit={this.CellEditParameters}
+							{...pops.baseProps}
+						/>
+					</div>
+				)}
+			</ToolkitProvider>
 		);
 	};
 
