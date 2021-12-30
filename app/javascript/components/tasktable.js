@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-
+import cellEditFactory, {Type} from "react-bootstrap-table2-editor";
+// TODO: Add popup for successful deletion of task
+// TODO: Add update functionality for each column
 class Tasks extends React.Component {
 	constructor(props) {
 		super(props);
@@ -9,8 +11,21 @@ class Tasks extends React.Component {
 			tasks: []
 		};
 	}
+	CellEditParameters = cellEditFactory({
+		mode: "click",
+		blurToSave: true,
+		afterSaveCell: (oldValue, newValue, row, column) => {
+			console.log(row);
+			const {id, task, priority, description} = row;
+			console.log(id);
+			console.log(task);
+			console.log(priority);
+			console.log(description);
+		}
+	});
 
-	SimpleTable = props => {
+	// This function generates the table
+	MainTable = props => {
 		//helper functions
 
 		const handleDelete = rowId => {
@@ -39,19 +54,33 @@ class Tasks extends React.Component {
 
 		const columns = [
 			{
-				dataField: "id",
-				text: "ID"
-			},
-			{
 				dataField: "task",
 				text: "Task"
 			},
 			{
 				dataField: "priority",
-				text: "Priority"
+				text: "Priority",
+				editor: {
+					type: Type.SELECT,
+					options: [
+						{
+							value: "High",
+							label: "High"
+						},
+						{
+							value: "Medium",
+							label: "Medium"
+						},
+						{
+							value: "Low",
+							label: "Low"
+						}
+					]
+				}
 			},
 			{
 				dataField: "description",
+
 				text: "Description"
 			},
 			{
@@ -72,11 +101,17 @@ class Tasks extends React.Component {
 		];
 		return (
 			<div>
-				<BootstrapTable keyField="id" data={props.data} columns={columns} />
+				<BootstrapTable
+					keyField="id"
+					data={props.data}
+					columns={columns}
+					cellEdit={this.CellEditParameters}
+				/>
 			</div>
 		);
 	};
 
+	//helper function to fetch the latest record from the database
 	update_state = () => {
 		const url = "/api/v1/tasks/index";
 		fetch(url)
@@ -93,8 +128,9 @@ class Tasks extends React.Component {
 	componentDidMount() {
 		this.update_state();
 	}
+
 	render() {
-		return <this.SimpleTable data={this.state.tasks} />;
+		return <this.MainTable data={this.state.tasks} />;
 	}
 }
 export default Tasks;

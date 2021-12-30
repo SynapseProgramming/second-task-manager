@@ -8,7 +8,7 @@ export default class Taskinput extends Component {
 		super(props);
 		this.state = {
 			task: "",
-			priority: "",
+			priority: "High",
 			description: ""
 		};
 
@@ -28,15 +28,35 @@ export default class Taskinput extends Component {
 		const body = {
 			task,
 			priority,
-			description: description.replace(/\n/g, "<br> <br>")
+			description
 		};
-		// display form selection as json
-		console.log(JSON.stringify(body));
+		const token = document.querySelector('meta[name="csrf-token"]').content;
+		const url = "api/v1/tasks/create";
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"X-CSRF-Token": token,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(body)
+		})
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw new Error("Network response was not ok.");
+			})
+			.then(response => {
+				//TODO: Add a popup which shows that the submission is successful
+				// TODO: Add data checks for the input fields.
+				console.log("Successfully Added");
+			})
+			.catch(error => console.log(error.message));
 	}
 
 	render() {
 		return (
-			<Form onSubmit={this.onSubmit}>
+			<Form noValidate onSubmit={this.onSubmit}>
 				<Form.Group className="mb-3" controlId="TaskInput">
 					<Form.Label>Task</Form.Label>
 					<Form.Control
@@ -59,6 +79,7 @@ export default class Taskinput extends Component {
 					<Form.Label>Description</Form.Label>
 					<Form.Control
 						name="description"
+						type="text"
 						onChange={this.onChange}
 						as="textarea"
 						rows={3}
