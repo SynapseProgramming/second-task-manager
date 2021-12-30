@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import cellEditFactory from "react-bootstrap-table2-editor";
 // TODO: Add popup for successful deletion of task
 // TODO: Add update functionality for each column
 class Tasks extends React.Component {
@@ -10,6 +11,9 @@ class Tasks extends React.Component {
 			tasks: []
 		};
 	}
+	CellEditParameters = cellEditFactory({
+		mode: "dbclick"
+	});
 
 	// This function generates the table
 	MainTable = props => {
@@ -71,7 +75,12 @@ class Tasks extends React.Component {
 		];
 		return (
 			<div>
-				<BootstrapTable keyField="id" data={props.data} columns={columns} />
+				<BootstrapTable
+					keyField="id"
+					data={props.data}
+					columns={columns}
+					cellEdit={this.CellEditParameters}
+				/>
 			</div>
 		);
 	};
@@ -93,6 +102,7 @@ class Tasks extends React.Component {
 	componentDidMount() {
 		this.update_state();
 	}
+
 	render() {
 		return <this.MainTable data={this.state.tasks} />;
 	}
