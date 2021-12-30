@@ -21,6 +21,35 @@ class Tasks extends React.Component {
 			console.log(task);
 			console.log(priority);
 			console.log(description);
+			// if theres no data filled inside
+			if (task.length == 0 || description.length == 0) return;
+			//simple json display
+			const body = {
+				task,
+				priority,
+				description
+			};
+			const token = document.querySelector('meta[name="csrf-token"]').content;
+			const url = "api/v1/update/" + String(id);
+			fetch(url, {
+				method: "PUT",
+				headers: {
+					"X-CSRF-Token": token,
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			})
+				.then(response => {
+					if (response.ok) {
+						return response.json();
+					}
+					throw new Error("Network response was not ok.");
+				})
+				.then(response => {
+					//TODO: Add a popup which shows that the submission is successful
+					console.log("Successfully Added");
+				})
+				.catch(error => console.log(error.message));
 		}
 	});
 
