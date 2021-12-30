@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import cellEditFactory from "react-bootstrap-table2-editor";
+import cellEditFactory, {Type} from "react-bootstrap-table2-editor";
 // TODO: Add popup for successful deletion of task
 // TODO: Add update functionality for each column
 class Tasks extends React.Component {
@@ -12,7 +12,8 @@ class Tasks extends React.Component {
 		};
 	}
 	CellEditParameters = cellEditFactory({
-		mode: "dbclick"
+		mode: "dbclick",
+		blurToSave: true
 	});
 
 	// This function generates the table
@@ -50,7 +51,24 @@ class Tasks extends React.Component {
 			},
 			{
 				dataField: "priority",
-				text: "Priority"
+				text: "Priority",
+				editor: {
+					type: Type.SELECT,
+					options: [
+						{
+							value: "High",
+							label: "High"
+						},
+						{
+							value: "Medium",
+							label: "Medium"
+						},
+						{
+							value: "Low",
+							label: "Low"
+						}
+					]
+				}
 			},
 			{
 				dataField: "description",
