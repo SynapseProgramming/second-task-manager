@@ -3,7 +3,6 @@ import BootstrapTable from "react-bootstrap-table-next";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import cellEditFactory, {Type} from "react-bootstrap-table2-editor";
 // TODO: Add popup for successful deletion of task
-// TODO: Add update functionality for each column
 class Tasks extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,12 +14,7 @@ class Tasks extends React.Component {
 		mode: "click",
 		blurToSave: true,
 		afterSaveCell: (oldValue, newValue, row, column) => {
-			console.log(row);
 			const {id, task, priority, description} = row;
-			console.log(id);
-			console.log(task);
-			console.log(priority);
-			console.log(description);
 			// if theres no data filled inside
 			if (task.length == 0 || description.length == 0) return;
 			//simple json display
