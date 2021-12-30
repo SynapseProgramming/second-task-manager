@@ -12,7 +12,7 @@ class Tasks extends React.Component {
 		};
 	}
 	CellEditParameters = cellEditFactory({
-		mode: "dbclick",
+		mode: "click",
 		blurToSave: true,
 		afterSaveCell: (oldValue, newValue, row, column) => {
 			console.log(row);
