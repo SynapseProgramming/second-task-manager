@@ -24,6 +24,18 @@ class Tasks extends React.Component {
 		}
 	});
 
+	//function which validates the length of new entries
+	validateLength = (newValue, row, column) => {
+		newValue = String(newValue);
+		if (newValue.length === 0) {
+			return {
+				valid: false,
+				message: "empty text boxes are not allowed!"
+			};
+		}
+		return true;
+	};
+
 	// This function generates the table
 	MainTable = props => {
 		//helper functions
@@ -55,7 +67,8 @@ class Tasks extends React.Component {
 		const columns = [
 			{
 				dataField: "task",
-				text: "Task"
+				text: "Task",
+				validator: this.validateLength
 			},
 			{
 				dataField: "priority",
@@ -80,7 +93,7 @@ class Tasks extends React.Component {
 			},
 			{
 				dataField: "description",
-
+				validator: this.validateLength,
 				text: "Description"
 			},
 			{
