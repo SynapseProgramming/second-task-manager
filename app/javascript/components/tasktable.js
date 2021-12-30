@@ -13,7 +13,15 @@ class Tasks extends React.Component {
 	}
 	CellEditParameters = cellEditFactory({
 		mode: "dbclick",
-		blurToSave: true
+		blurToSave: true,
+		afterSaveCell: (oldValue, newValue, row, column) => {
+			console.log(row);
+			const {id, task, priority, description} = row;
+			console.log(id);
+			console.log(task);
+			console.log(priority);
+			console.log(description);
+		}
 	});
 
 	// This function generates the table
