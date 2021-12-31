@@ -1,6 +1,7 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import * as Yup from "yup";
 import {useFormik} from "formik";
@@ -11,6 +12,8 @@ const schema = Yup.object().shape({
 });
 
 const TaskInput = () => {
+	const [success, setSuccess] = useState(false);
+
 	const updateDatabase = values => {
 		const {task, priority, description} = values;
 		// if theres no data filled inside
@@ -39,6 +42,7 @@ const TaskInput = () => {
 			})
 			.then(response => {
 				//TODO: Add a popup which shows that the submission is successful
+				setSuccess(true);
 				console.log("Successfully Added");
 			})
 			.catch(error => console.log(error.message));
@@ -52,6 +56,9 @@ const TaskInput = () => {
 
 	return (
 		<Form noValidate onSubmit={formik.handleSubmit}>
+			<Alert show={success} variant="success">
+				yes
+			</Alert>
 			<Form.Group className="mb-3" controlId="TaskInput">
 				<Form.Label>Task</Form.Label>
 				<Form.Control
