@@ -24,37 +24,7 @@ import {useFormik} from "formik";
 // 	onSubmit(event) {
 // 		// prevent default html redirect
 // 		event.preventDefault();
-// 		const {task, priority, description} = this.state;
-// 		// if theres no data filled inside
-// 		if (task.length == 0 || description.length == 0) return;
-// 		//simple json display
-// 		const body = {
-// 			task,
-// 			priority,
-// 			description
-// 		};
-// 		const token = document.querySelector('meta[name="csrf-token"]').content;
-// 		const url = "api/v1/tasks/create";
-// 		fetch(url, {
-// 			method: "POST",
-// 			headers: {
-// 				"X-CSRF-Token": token,
-// 				"Content-Type": "application/json"
-// 			},
-// 			body: JSON.stringify(body)
-// 		})
-// 			.then(response => {
-// 				if (response.ok) {
-// 					return response.json();
-// 				}
-// 				throw new Error("Network response was not ok.");
-// 			})
-// 			.then(response => {
-// 				//TODO: Add a popup which shows that the submission is successful
-// 				// TODO: Add data checks for the input fields.
-// 				console.log("Successfully Added");
-// 			})
-// 			.catch(error => console.log(error.message));
+
 // 	}
 //
 
@@ -70,11 +40,43 @@ import {useFormik} from "formik";
 // });
 
 const TaskInput = () => {
+	const updateDatabase = values => {
+		const {task, priority, description} = values;
+		// if theres no data filled inside
+		if (task.length == 0 || description.length == 0) return;
+		//simple json display
+		const body = {
+			task,
+			priority,
+			description
+		};
+		const token = document.querySelector('meta[name="csrf-token"]').content;
+		const url = "api/v1/tasks/create";
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"X-CSRF-Token": token,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(body)
+		})
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw new Error("Network response was not ok.");
+			})
+			.then(response => {
+				//TODO: Add a popup which shows that the submission is successful
+				// TODO: Add data checks for the input fields.
+				console.log("Successfully Added");
+			})
+			.catch(error => console.log(error.message));
+	};
+
 	const formik = useFormik({
 		initialValues: {task: "", priority: "High", description: ""},
-		onSubmit: values => {
-			alert(JSON.stringify(values, null, 1));
-		}
+		onSubmit: updateDatabase
 	});
 
 	return (
