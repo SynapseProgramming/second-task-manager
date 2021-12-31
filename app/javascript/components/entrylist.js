@@ -43,6 +43,9 @@ const TaskInput = () => {
 			.then(response => {
 				//TODO: Add a popup which shows that the submission is successful
 				setSuccess(true);
+				window.setTimeout(() => {
+					setSuccess(false);
+				}, 3000);
 				console.log("Successfully Added");
 			})
 			.catch(error => console.log(error.message));
@@ -57,7 +60,7 @@ const TaskInput = () => {
 	return (
 		<Form noValidate onSubmit={formik.handleSubmit}>
 			<Alert show={success} variant="success">
-				yes
+				Task successfully added!
 			</Alert>
 			<Form.Group className="mb-3" controlId="TaskInput">
 				<Form.Label>Task</Form.Label>
