@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -14,6 +15,7 @@ const schema = Yup.object().shape({
 const TaskInput = () => {
 	const [success, setSuccess] = useState(false);
 	const [failure, setFailure] = useState(false);
+	const [formRef, setFormRef] = useState(0);
 
 	const updateDatabase = values => {
 		const {task, priority, description} = values;
@@ -43,6 +45,7 @@ const TaskInput = () => {
 			})
 			.then(response => {
 				setSuccess(true);
+				ReactDOM.findDOMNode(formRef).reset();
 				window.setTimeout(() => {
 					setSuccess(false);
 				}, 3000);
@@ -64,7 +67,12 @@ const TaskInput = () => {
 	});
 
 	return (
-		<Form noValidate onSubmit={formik.handleSubmit}>
+		<Form
+			noValidate
+			onSubmit={formik.handleSubmit}
+			id="mainForm"
+			ref={form => setFormRef(form)}
+		>
 			<Alert show={success} variant="success">
 				Task successfully added!
 			</Alert>
