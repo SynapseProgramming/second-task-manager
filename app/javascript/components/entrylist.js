@@ -62,10 +62,11 @@ const TaskInput = () => {
 					name="task"
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
+					isInvalid={!!formik.errors.task}
 				/>
-				{formik.touched.task && formik.errors.task ? (
-					<div>{formik.errors.task}</div>
-				) : null}
+				<Form.Control.Feedback type="invalid">
+					{formik.errors.task}
+				</Form.Control.Feedback>
 			</Form.Group>
 			<Form.Group className="mb-2" controlId="PriorityInput">
 				<Form.Label>Priority</Form.Label>
