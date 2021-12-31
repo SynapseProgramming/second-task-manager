@@ -47,7 +47,8 @@ const TaskInput = () => {
 
 	const formik = useFormik({
 		initialValues: {task: "", priority: "High", description: ""},
-		onSubmit: updateDatabase
+		onSubmit: updateDatabase,
+		validationSchema: schema
 	});
 
 	return (
@@ -60,7 +61,11 @@ const TaskInput = () => {
 					rows={3}
 					name="task"
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 				/>
+				{formik.touched.task && formik.errors.task ? (
+					<div>{formik.errors.task}</div>
+				) : null}
 			</Form.Group>
 			<Form.Group className="mb-2" controlId="PriorityInput">
 				<Form.Label>Priority</Form.Label>
@@ -76,6 +81,7 @@ const TaskInput = () => {
 					name="description"
 					type="text"
 					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
 					as="textarea"
 					rows={3}
 				/>
