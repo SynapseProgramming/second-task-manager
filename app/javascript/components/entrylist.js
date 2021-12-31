@@ -39,7 +39,6 @@ const TaskInput = () => {
 			})
 			.then(response => {
 				//TODO: Add a popup which shows that the submission is successful
-				// TODO: Add data checks for the input fields.
 				console.log("Successfully Added");
 			})
 			.catch(error => console.log(error.message));
@@ -85,7 +84,11 @@ const TaskInput = () => {
 					onBlur={formik.handleBlur}
 					as="textarea"
 					rows={3}
+					isInvalid={!!formik.errors.description}
 				/>
+				<Form.Control.Feedback type="invalid">
+					{formik.errors.description}
+				</Form.Control.Feedback>
 			</Form.Group>
 			<Button type="submit">Submit</Button>
 		</Form>
