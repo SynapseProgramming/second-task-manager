@@ -2,6 +2,13 @@ import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import * as Yup from "yup";
+import {Formik} from "formik";
+
+const schema = yup.object().shape({
+	task: yup.string().required(),
+	description: yup.string().required()
+});
 
 export default class Taskinput extends Component {
 	constructor(props) {
