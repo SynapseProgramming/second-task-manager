@@ -65,7 +65,7 @@ class Tasks extends React.Component {
 	MainTable = props => {
 		//helper functions
 
-		const {SearchBar} = Search;
+		const {SearchBar, ClearSearchButton} = Search;
 		const handleDelete = rowId => {
 			console.log(rowId);
 			const url = `/api/v1/destroy/${rowId}`;
@@ -144,6 +144,7 @@ class Tasks extends React.Component {
 				{pops => (
 					<div>
 						<SearchBar {...pops.searchProps} />
+						<ClearSearchButton {...pops.searchProps} />
 						<hr />
 						<BootstrapTable
 							cellEdit={this.CellEditParameters}
