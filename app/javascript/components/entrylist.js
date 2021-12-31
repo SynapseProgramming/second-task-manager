@@ -2,42 +2,13 @@ import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import {yup} from "yup";
+import * as Yup from "yup";
 import {useFormik} from "formik";
 
-//
-// export default class Taskinput extends Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {
-// 			task: "",
-// 			priority: "High",
-// 			description: ""
-// 		};
-//
-// 		this.onChange = this.onChange.bind(this);
-// 		this.onSubmit = this.onSubmit.bind(this);
-// 	}
-// 	onChange(event) {
-// 		this.setState({[event.target.name]: event.target.value});
-// 	}
-// 	onSubmit(event) {
-// 		// prevent default html redirect
-// 		event.preventDefault();
-
-// 	}
-//
-
-//
-// 	render() {
-
-// 	}
-// }
-
-// const schema = yup.object().shape({
-// 	task: yup.string().required(),
-// 	description: yup.string().required()
-// });
+const schema = Yup.object().shape({
+	task: Yup.string().required("Required"),
+	description: Yup.string().required("Required")
+});
 
 const TaskInput = () => {
 	const updateDatabase = values => {
