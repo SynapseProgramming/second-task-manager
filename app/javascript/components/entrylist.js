@@ -13,6 +13,7 @@ const schema = Yup.object().shape({
 
 const TaskInput = () => {
 	const [success, setSuccess] = useState(false);
+	const [failure, setFailure] = useState(false);
 
 	const updateDatabase = values => {
 		const {task, priority, description} = values;
@@ -41,14 +42,19 @@ const TaskInput = () => {
 				throw new Error("Network response was not ok.");
 			})
 			.then(response => {
-				//TODO: Add a popup which shows that the submission is successful
 				setSuccess(true);
 				window.setTimeout(() => {
 					setSuccess(false);
 				}, 3000);
 				console.log("Successfully Added");
 			})
-			.catch(error => console.log(error.message));
+			.catch(error => {
+				console.log(error.message);
+				setFailure(true);
+				window.setTimeout(() => {
+					setFailure(false);
+				}, 6000);
+			});
 	};
 
 	const formik = useFormik({
@@ -61,6 +67,9 @@ const TaskInput = () => {
 		<Form noValidate onSubmit={formik.handleSubmit}>
 			<Alert show={success} variant="success">
 				Task successfully added!
+			</Alert>
+			<Alert show={failure} variant="danger">
+				Error! Task was not added to the database!
 			</Alert>
 			<Form.Group className="mb-3" controlId="TaskInput">
 				<Form.Label>Task</Form.Label>
