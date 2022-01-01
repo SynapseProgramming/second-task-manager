@@ -6,7 +6,9 @@ export default () => (
 	<div>
 		<Navbar bg="dark" variant="dark">
 			<Nav className="ml-auto">
-				<Navbar.Brand>Task Planner</Navbar.Brand>
+				<Navbar.Brand as={Link} to="/">
+					Task Planner
+				</Navbar.Brand>
 				<Nav.Link as={Link} to="/tasktable">
 					View Tasks
 				</Nav.Link>
