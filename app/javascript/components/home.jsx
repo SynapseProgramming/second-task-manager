@@ -1,23 +1,20 @@
 import React from "react";
 import {Outlet, Link} from "react-router-dom";
+import {Navbar, Nav} from "react-bootstrap";
 
 export default () => (
 	<div>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<span class="navbar-brand mb-0 h1">Task Planner V1.0</span>
-			<form class="form-inline">
-				<Link to="/tasktable">
-					<button class="btn btn-outline-success" type="button">
-						View Tasks
-					</button>
-				</Link>
-				<Link to="/entrylist">
-					<button class="btn btn-sm btn-outline-secondary" type="button">
-						Add Tasks
-					</button>
-				</Link>
-			</form>
-		</nav>
+		<Navbar bg="dark" variant="dark">
+			<Nav className="ml-auto">
+				<Navbar.Brand>Task Planner</Navbar.Brand>
+				<Nav.Link as={Link} to="/tasktable">
+					View Tasks
+				</Nav.Link>
+				<Nav.Link as={Link} to="/entrylist">
+					Add Tasks
+				</Nav.Link>
+			</Nav>
+		</Navbar>
 		<Outlet />
 	</div>
 );
