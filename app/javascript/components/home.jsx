@@ -7,7 +7,7 @@ export default () => (
 		<Navbar bg="dark" variant="dark">
 			<Nav className="ml-auto">
 				<Navbar.Brand as={Link} to="/">
-					Task Planner
+					Ricardo Planner
 				</Navbar.Brand>
 				<Nav.Link as={Link} to="/tasktable">
 					View Tasks
