@@ -8,12 +8,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import Home from "../components/home";
 import TaskTable from "../components/tasktable";
 import EntryList from "../components/entrylist";
+import Ricardo from "../components/ricardo";
 
 document.addEventListener("DOMContentLoaded", () => {
 	render(
 		<Router>
 			<Routes>
 				<Route path="/" element={<Home />}>
+					<Route index element={<Ricardo />} />
 					<Route path="tasktable" element={<TaskTable />} />
 					<Route path="entrylist" element={<EntryList />} />
 				</Route>
