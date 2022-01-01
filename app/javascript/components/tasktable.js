@@ -65,7 +65,6 @@ class Tasks extends React.Component {
 
 		const {SearchBar, ClearSearchButton} = Search;
 		const handleDelete = rowId => {
-			console.log(rowId);
 			const url = `/api/v1/destroy/${rowId}`;
 			const token = document.querySelector('meta[name="csrf-token"]').content;
 			fetch(url, {
@@ -82,7 +81,6 @@ class Tasks extends React.Component {
 					throw new Error("Network response was not ok.");
 				})
 				.then(() => {
-					console.log("successfully deleted record!");
 					this.update_state();
 				})
 				.catch(error => console.log(error.message));
