@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import BootstrapTable from "react-bootstrap-table-next";
+import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import cellEditFactory, {Type} from "react-bootstrap-table2-editor";
-// TODO: Add popup for successful deletion of task
-// TODO: Add update functionality for each column
+
 class Tasks extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,21 +15,56 @@ class Tasks extends React.Component {
 		mode: "click",
 		blurToSave: true,
 		afterSaveCell: (oldValue, newValue, row, column) => {
-			console.log(row);
 			const {id, task, priority, description} = row;
-			console.log(id);
-			console.log(task);
-			console.log(priority);
-			console.log(description);
+			// if theres no data filled inside
+			if (task.length == 0 || description.length == 0) return;
+			//simple json display
+			const body = {
+				task,
+				priority,
+				description
+			};
+			const token = document.querySelector('meta[name="csrf-token"]').content;
+			const url = "api/v1/update/" + String(id);
+			fetch(url, {
+				method: "PUT",
+				headers: {
+					"X-CSRF-Token": token,
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(body)
+			})
+				.then(response => {
+					if (response.ok) {
+						return response.json();
+					}
+					throw new Error("Network response was not ok.");
+				})
+				.then(response => {
+					console.log("Successfully Added");
+				})
+				.catch(error => console.log(error.message));
 		}
 	});
+
+	//function which validates the length of new entries
+	validateLength = (newValue, row, column) => {
+		newValue = String(newValue);
+		if (newValue.length === 0) {
+			return {
+				valid: false,
+				message: "empty text boxes are not allowed!"
+			};
+		}
+		return true;
+	};
 
 	// This function generates the table
 	MainTable = props => {
 		//helper functions
 
+		const {SearchBar, ClearSearchButton} = Search;
 		const handleDelete = rowId => {
-			console.log(rowId);
 			const url = `/api/v1/destroy/${rowId}`;
 			const token = document.querySelector('meta[name="csrf-token"]').content;
 			fetch(url, {
@@ -46,7 +81,6 @@ class Tasks extends React.Component {
 					throw new Error("Network response was not ok.");
 				})
 				.then(() => {
-					console.log("successfully deleted record!");
 					this.update_state();
 				})
 				.catch(error => console.log(error.message));
@@ -55,11 +89,13 @@ class Tasks extends React.Component {
 		const columns = [
 			{
 				dataField: "task",
-				text: "Task"
+				text: "Task",
+				validator: this.validateLength
 			},
 			{
 				dataField: "priority",
 				text: "Priority",
+				sort: true,
 				editor: {
 					type: Type.SELECT,
 					options: [
@@ -80,7 +116,7 @@ class Tasks extends React.Component {
 			},
 			{
 				dataField: "description",
-
+				validator: this.validateLength,
 				text: "Description"
 			},
 			{
@@ -100,14 +136,19 @@ class Tasks extends React.Component {
 			}
 		];
 		return (
-			<div>
-				<BootstrapTable
-					keyField="id"
-					data={props.data}
-					columns={columns}
-					cellEdit={this.CellEditParameters}
-				/>
-			</div>
+			<ToolkitProvider keyField="id" data={props.data} columns={columns} search>
+				{pops => (
+					<div>
+						<SearchBar {...pops.searchProps} />
+						<ClearSearchButton {...pops.searchProps} />
+						<hr />
+						<BootstrapTable
+							cellEdit={this.CellEditParameters}
+							{...pops.baseProps}
+						/>
+					</div>
+				)}
+			</ToolkitProvider>
 		);
 	};
 
