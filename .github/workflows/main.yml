@@ -30,11 +30,11 @@ jobs:
         npm install --legacy-peer-deps
         npm install -g yarn
 
-    - name: Run rubocop
-      run: bundle exec rubocop
+    # - name: Run rubocop
+      # run: bundle exec rubocop
 
-    - name: Run brakeman
-      run: bundle exec brakeman
+    # - name: Run brakeman
+      # run: bundle exec brakeman
 
     - name: Setup database
       env:
@@ -49,13 +49,13 @@ jobs:
         bundle exec rails db:create
         bundle exec rails db:schema:load
 
-    - name: Run rspec
-      env:
-        RAILS_ENV: test
-        POSTGRES_HOST: postgres
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: ci_db_test
-        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
-        SELENIUM_URL: 'http://chrome:4444/wd/hub'
-      run: bundle exec rspec
+    # - name: Run rspec
+    #   env:
+    #     RAILS_ENV: test
+    #     POSTGRES_HOST: postgres
+    #     POSTGRES_USER: postgres
+    #     POSTGRES_PASSWORD: postgres
+    #     POSTGRES_DB: ci_db_test
+    #     POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+    #     SELENIUM_URL: 'http://chrome:4444/wd/hub'
+    #   run: bundle exec rspec
