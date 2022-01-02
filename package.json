@@ -1,6 +1,7 @@
 {
   "name": "second-task-manager",
   "private": true,
+  "homepage": "/",
   "dependencies": {
     "@babel/preset-react": "^7.16.5",
     "@popperjs/core": "^2.11.0",
