@@ -23,7 +23,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-
+    - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Setup app dependencies
       run: |
         gem install bundler -v 1.17.3 --no-document
