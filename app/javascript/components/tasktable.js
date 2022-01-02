@@ -3,7 +3,6 @@ import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, {Search} from "react-bootstrap-table2-toolkit";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import cellEditFactory, {Type} from "react-bootstrap-table2-editor";
-// TODO: Add popup for successful deletion of task
 
 class Tasks extends React.Component {
 	constructor(props) {
@@ -42,7 +41,6 @@ class Tasks extends React.Component {
 					throw new Error("Network response was not ok.");
 				})
 				.then(response => {
-					//TODO: Add a popup which shows that the submission is successful
 					console.log("Successfully Added");
 				})
 				.catch(error => console.log(error.message));
@@ -67,7 +65,6 @@ class Tasks extends React.Component {
 
 		const {SearchBar, ClearSearchButton} = Search;
 		const handleDelete = rowId => {
-			console.log(rowId);
 			const url = `/api/v1/destroy/${rowId}`;
 			const token = document.querySelector('meta[name="csrf-token"]').content;
 			fetch(url, {
@@ -84,7 +81,6 @@ class Tasks extends React.Component {
 					throw new Error("Network response was not ok.");
 				})
 				.then(() => {
-					console.log("successfully deleted record!");
 					this.update_state();
 				})
 				.catch(error => console.log(error.message));
