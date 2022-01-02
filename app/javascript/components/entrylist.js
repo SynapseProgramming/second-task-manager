@@ -49,7 +49,6 @@ const TaskInput = () => {
 				window.setTimeout(() => {
 					setSuccess(false);
 				}, 3000);
-				console.log("Successfully Added");
 			})
 			.catch(error => {
 				console.log(error.message);

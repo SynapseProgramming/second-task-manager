@@ -22,6 +22,8 @@ class Api::V1::TasksController < ApplicationController
 
 
   def show
+    @tasks_count=Task.count
+      render json: {task_count: @tasks_count}
   end
 
   def destroy
