@@ -1,8 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Card from "react-bootstrap/Card";
 
 const ShowCards = () => {
 	const [remainingTasks, setremainingTasks] = useState(0);
+
+	useEffect(() => {
+		const url = "/api/v1/tasks/show";
+		fetch(url)
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw new Error("Network response was not ok.");
+			})
+			.then(response => {
+				setremainingTasks(response.task_count);
+			})
+			.catch(() => console.log("something went wrong!"));
+	});
 
 	return (
 		<div>
