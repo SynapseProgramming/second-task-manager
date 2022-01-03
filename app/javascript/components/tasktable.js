@@ -12,7 +12,7 @@ class Tasks extends React.Component {
 		};
 	}
 	CellEditParameters = cellEditFactory({
-		mode: "click",
+		mode: "dbclick",
 		blurToSave: true,
 		afterSaveCell: (oldValue, newValue, row, column) => {
 			const {id, task, priority, description} = row;
