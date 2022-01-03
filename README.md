@@ -2,6 +2,7 @@
 
 ## Description
 This is a simple task manager written with Ruby on rails for the backend, and React for the frontend. 
+My Writeup can be found in the main project folder
 
 ## Link to deployed app
 https://fathomless-harbor-80395.herokuapp.com/
